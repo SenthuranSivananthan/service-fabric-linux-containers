@@ -1,0 +1,20 @@
+﻿<ServiceManifest Name="BackendServicePackage" Version="1.0.0"
+	xmlns="http://schemas.microsoft.com/2011/01/fabric" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Description> A service that implements a stateless backend in a container</Description>
+  <ServiceTypes>
+    <StatelessServiceType ServiceTypeName="$$SERVICE_TYPE_NAME$$" UseImplicitHost="true" />
+  </ServiceTypes>
+  <CodePackage Name="$$SERVICE_NAME$$.Code" Version="1.0.0">
+    <EntryPoint>
+      <ContainerHost>
+        <ImageName>$$CONTAINER_REGISTRY$$/$$CONTAINER$$:$$TAG$$</ImageName>
+        <Commands></Commands>
+      </ContainerHost>
+    </EntryPoint>
+  </CodePackage>
+  <Resources>
+    <Endpoints>
+      <Endpoint Name="APIEndpoint" UriScheme="http" Port="9000" Protocol="http" />
+    </Endpoints>
+  </Resources>
+</ServiceManifest>

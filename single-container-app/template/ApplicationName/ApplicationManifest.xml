@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ApplicationManifest ApplicationTypeName="$$APPLICATION_TYPE_NAME$$"
+                     ApplicationTypeVersion="1.0.0"
+                     xmlns="http://schemas.microsoft.com/2011/01/fabric"
+                     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Parameters>
+    <Parameter Name="BackendService_InstanceCount" DefaultValue="-1" />
+  </Parameters>
+  <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="$$SERVICE_NAME$$Package" ServiceManifestVersion="1.0.0" />
+    <Policies>
+      <ContainerHostPolicies CodePackageRef="$$SERVICE_NAME$$.Code">
+        <RepositoryCredentials AccountName="$$CONTAINER_REPO_USERNAME$$" Password="$$CONTAINER_REPO_PASSWORD$$" PasswordEncrypted="$$TRUE|FALSE$$" />
+        <PortBinding ContainerPort="8080" EndpointRef="APIEndpoint" />
+      </ContainerHostPolicies>
+    </Policies>
+  </ServiceManifestImport>
+  <DefaultServices>
+    <Service Name="BackendService">
+      <StatelessService ServiceTypeName="$$SERVICE_TYPE_NAME$$"
+				InstanceCount="[BackendService_InstanceCount]">
+        <SingletonPartition />
+      </StatelessService>
+    </Service>
+  </DefaultServices>
+</ApplicationManifest>
